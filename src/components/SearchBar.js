@@ -1,21 +1,39 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { TextInput } from 'react-native-gesture-handler';
 
 const SearchBar = () => {
     
     return (
-        <View style={styles.backgound}>
-            <Text>Boo yah</Text>
+        <View style={styles.searchWrapperStyle}>
+            <Ionicons name="ios-search" size={28} color="black" />
+            <TextInput 
+                style={styles.inputStyle} 
+                placeholder='Search' 
+            />
         </View>
     )
 };
 
 const styles = StyleSheet.create({
-    backgound: {
-        backgroundColor: 'rgba(240, 238, 238, 1)',
+    searchWrapperStyle: {
         height: 50,
-        borderRadius: 10,
-        marginHorizontal: 15,
+        marginHorizontal: 10,
+        marginVertical: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 15,
+    },
+    inputStyle: {
+        backgroundColor: 'rgba(240, 238, 238, 1)',
+        borderRadius: 15,
+        paddingHorizontal: 10,
+        marginHorizontal: 10,
+        // width: '100%',
+        height: '100%',
+        flex: 1,
     }
 });
 
