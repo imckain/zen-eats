@@ -1,23 +1,19 @@
-import React, { useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 import SearchBar from '../components/SearchBar';
-
 import yelp from '../api/yelp';
+import useResults from '../hooks/useResults';
+import ResultsList from '../components/ResultsList';
 
-const SearchScreen = () => {
+
+const SearchScreen = props => {
     const [searchTerm, setSearchTerm] = useState('');
-
-    const [results, setResults] = useState([]);
-
-    const searchAPI = async () => {
-        const response = await yelp.get('/search', {
-            params: {
-                limit: 50,
-                term: searchTerm,
-                location: 'columbus'
-            }
+    const [searchAPI, results, errorMessage] = useResults();
+    
+    const filterResultsByPrice = (price) => {
+        return results.filter(result => {
+            return result.price === price;
         });
-        setResults(response.data.businesses);
     };
     
     return (
@@ -25,9 +21,27 @@ const SearchScreen = () => {
             <SearchBar 
                 searchTerm={searchTerm} 
                 onSearchTermChange={setSearchTerm} 
-                onSearchTermSubmit={searchAPI}
+                onSearchTermSubmit={() => searchAPI(searchTerm)}
             />
-            <Text>{results.length}</Text>
+            {errorMessage ? <Text>{errorMessage}</Text> : null}
+            <ScrollView>
+                <ResultsList 
+                    title='Cost Effective' 
+                    results={filterResultsByPrice('$')}
+                    />
+                <ResultsList 
+                    title='Not Cheap' 
+                    results={filterResultsByPrice('$$')}
+                    />
+                <ResultsList 
+                    title='Someone Got Paid' 
+                    results={filterResultsByPrice('$$$')}
+                    />
+                <ResultsList 
+                    title='Fancy Pants' 
+                    results={filterResultsByPrice('$$$$')}
+                />
+            </ScrollView>
         </View>
     )
 };
@@ -35,7 +49,7 @@ const SearchScreen = () => {
 const styles = StyleSheet.create({
     background: {
         backgroundColor: '#ffffff',
-        height: '100%',
+        flex: 1,
     }
 });
 
