@@ -3,14 +3,19 @@ import { Text, View, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
-const SearchBar = () => {
+const SearchBar = ({ searchTerm, onSearchTermChange, onSearchTermSubmit }) => {
     
     return (
         <View style={styles.searchWrapperStyle}>
             <Ionicons name="ios-search" size={28} color="black" />
             <TextInput 
+                autoCapitalize='none'
+                autoCorrect={false}
                 style={styles.inputStyle} 
                 placeholder='Search' 
+                value={searchTerm}
+                onChangeText={onSearchTermChange}
+                onEndEditing={onSearchTermSubmit}
             />
         </View>
     )
