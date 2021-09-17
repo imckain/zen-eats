@@ -8,32 +8,59 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 const ResultsShowScreen = ({ navigation }) => {
     const [result, setResult] = useState(null);
-    const [reviews, setReviews] = useState(null);
+    const [reviews, setReviews] = useState([]);
+    
     const id = navigation.getParam('id');
     
     const getResult = async (id) => {
         const response = await yelp.get(`/${id}`)
         setResult(response.data);
     };
-
+    
     const getReviews = async (id) => {
         const response = await yelp.get(`/${id}/reviews`);
-        setReviews(response.data);
+        setReviews(response.data.reviews);
     }
-
+    
     useEffect(() => {
         getResult(id);
     }, []);
-
+    
     useEffect(() => {
         getReviews(id);
     }, []);
+    
+    // console.log(reviews);
+    // console.log(reviews.id);
+    // console.log(reviews.reviews[1].text);
+    // const DATA = [
+    //     {
+    //         id: reviews[1].id,
+    //         rating: reviews[1].rating,
+    //         name: reviews[1].user.name,
+    //         text: reviews[1].text,
+    //         link: reviews[1].url,
+    //     },
+    //     {
+    //         id: reviews[2].id,
+    //         rating: reviews[2].rating,
+    //         name: reviews[2].user.name,
+    //         text: reviews[2].text,
+    //         link: reviews[2].url,
+    //     },
+    //     {
+    //         id: reviews[3].id,
+    //         rating: reviews[3].rating,
+    //         name: reviews[3].user.name,
+    //         text: reviews[3].text,
+    //         link: reviews[3].url,
+    //     },
+    // ]
 
     if (!result) {
         return null;
     }
 
-    console.log(reviews);
 
     return (
         <View style={styles.containerStyle}>
@@ -46,15 +73,6 @@ const ResultsShowScreen = ({ navigation }) => {
                 {/* <Text> {result.is_open} </Text> */}
                 <Text><FontAwesome5 name="phone-alt" size={24} color="#35C75A" /> {result.display_phone} </Text>
                 <Text><FontAwesome name="map-o" size={24} color="black" /> {result.location.display_address} </Text>
-                <FlatList 
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    data={reviews}
-                    keyExtractor={(reviews) => reviews.id}
-                    renderItem={({ item }) => {
-                        return <Text>{item}</Text>
-                    }}
-                />
             </View>
             <FlatList 
                 horizontal
@@ -65,6 +83,22 @@ const ResultsShowScreen = ({ navigation }) => {
                     return <Image style={styles.imageStyle} source={{ uri: item }} />
                 }}
                 style={styles.flatListStyle}
+            />
+            <FlatList 
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                data={reviews}
+                keyExtractor={(reviews) => reviews.id}
+                renderItem={({ item }) => {
+                    return (
+                        <View>
+                            <Text>{item.user.name}</Text>
+                            <Text>{item.rating}</Text>
+                            <Text>{item.text}</Text>
+                        </View>
+                    )
+                }}
+                style={styles.reviewFlatListStyle}
             />
         </View>
     );
@@ -90,6 +124,11 @@ const styles = StyleSheet.create({
     },
     flatListStyle: {
         marginVertical: 15,
+    },
+    reviewFlatListStyle: {
+        fontSize: 15,
+        width: 250,
+        height:250,
     },
     imageStyle: {
         width: 200,
