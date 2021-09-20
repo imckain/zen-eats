@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import yelp from '../api/yelp';
+// import location from './useLocation';
 import * as Location from 'expo-location';
 
 export default () => {
-    const [results, setResults] = useState([]);
-    const [errorMessage, setErrorMessage] = useState('');
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    
-    useEffect(() => {
-        (async () => {
-            let { status } = await Location.requestForegroundPermissionsAsync();
+    const [results, setResults] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const useLocation = async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 setErrorMsg('Permission to access location was denied');
                 return;
@@ -18,8 +18,9 @@ export default () => {
             
             let location = await Location.getCurrentPositionAsync({});
             setLocation(location);
-        })();
-    }, []);
+            console.log(`latitude: ${location.coords.latitude}`);
+            console.log(`longitude: ${location.coords.longitude}`);
+    };
 
     const searchAPI = async (defaultTerm) => {
         try {
@@ -38,11 +39,8 @@ export default () => {
         }
     };
 
-    console.log(`latitude: ${location.coords.latitude}`);
-    console.log(`longitude: ${location.coords.longitude}`);
-
     useEffect(() => {
-        searchAPI('')
+        useLocation({}).then(searchAPI(''))
     }, []);
 
     return [searchAPI, results, errorMessage];
