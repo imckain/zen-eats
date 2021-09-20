@@ -43,6 +43,9 @@ const ReviewList = ({ reviews }) => {
 };
 
 const styles = StyleSheet.create({
+    containerStyle: {
+        flexDirection: 'column'
+    },
     flatListStyle: {
         marginVertical: 15,
     },
@@ -61,8 +64,6 @@ const styles = StyleSheet.create({
         height: 'auto',
         width: 300,
         padding: 15,
-        // borderBottomColor: 'black',
-        // borderBottomWidth: 5
     },
     reviewHeaderStyle: {
         marginBottom: 10,
@@ -89,7 +90,6 @@ const styles = StyleSheet.create({
     quoteLineStyle: {
         width: 3,
         height: '100%',
-        // backgroundColor: 'rgba(44, 44, 44, .29)',
         backgroundColor: '#D32422',
         marginRight: 2,
         borderRadius: 4,
@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
         width: 1.5,
         height: '93%',
         backgroundColor: 'rgba(44, 44, 44, .29)',
-        // backgroundColor: '#D32422',
         alignSelf: 'center',
         borderRadius: 4,
     },
@@ -115,13 +114,11 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 4,
         marginTop: 15,
-        // backgroundColor: 'black'
     },
     linkButtonTextStyle: {
         fontSize: 16,
         textAlign: 'center',
         fontWeight: '600',
-        // color: 'black'
     },
 });
 
