@@ -17,14 +17,14 @@ const SearchScreen = props => {
     };
     
     return (
-        <View style={styles.background}>
+        <View style={styles.resultsContainerStyle}>
             <SearchBar 
                 searchTerm={searchTerm} 
                 onSearchTermChange={setSearchTerm} 
                 onSearchTermSubmit={() => searchAPI(searchTerm)}
             />
-            {errorMessage ? <Text>{errorMessage}</Text> : null}
-            <ScrollView>
+            {/* {errorMessage ? <Text>{errorMessage}</Text> : null} */}
+            <ScrollView style={styles.resultsListsStyles}>
                 <ResultsList 
                     title='Cost Effective' 
                     results={filterResultsByPrice('$')}
@@ -41,16 +41,20 @@ const SearchScreen = props => {
                     title='Fancy Pants' 
                     results={filterResultsByPrice('$$$$')}
                 />
+                <View style={styles.paddingBlock} />
             </ScrollView>
         </View>
     )
 };
 
 const styles = StyleSheet.create({
-    background: {
+    resultsContainerStyle: {
         backgroundColor: '#ffffff',
         flex: 1,
-    }
+    },
+    paddingBlock: {
+        height: 40
+    },
 });
 
 export default SearchScreen;
