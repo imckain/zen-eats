@@ -20,6 +20,7 @@ export default () => {
   
   const searchAPI = useCallback(async (defaultTerm) => {
     try {
+      console.log('searchAPI() ran');
       const response = await yelp.get('/search', {
         params: {
           limit: 50,
