@@ -20,8 +20,6 @@ export default () => {
   
   const searchAPI = useCallback(async (defaultTerm) => {
     try {
-      console.log(`latitude: ${location.latitude}`);
-      console.log(`longitude: ${location.longitude}`);
       const response = await yelp.get('/search', {
         params: {
           limit: 50,
@@ -47,9 +45,5 @@ export default () => {
     }
   }, [location])
 
-  console.log(`location:`);
-  console.log(location);
-  console.log('location err: ' + locationErrorMessage);
-  console.log('results length: ' + results.length);
   return [searchAPI, results, apiErrorMessage, location, locationErrorMessage];
 };
