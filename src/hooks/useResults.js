@@ -1,47 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import yelp from '../api/yelp';
-// import location from './useLocation';
 import * as Location from 'expo-location';
 
 export default () => {
-    const [location, setLocation] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
-    const [results, setResults] = useState([]);
-    const [errorMessage, setErrorMessage] = useState('');
+  const [location, setLocation] = useState(null);
+  const [locationErrorMessage, setLocationErrorMessage] = useState(null);
+  const [results, setResults] = useState([]);
+  const [apiErrorMessage, setApiErrorMessage] = useState('');
 
-    const useLocation = async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
-                return;
-            }
-            
-            let location = await Location.getCurrentPositionAsync({});
-            setLocation(location);
-            console.log(`latitude: ${location.coords.latitude}`);
-            console.log(`longitude: ${location.coords.longitude}`);
-    };
-
-    const searchAPI = async (defaultTerm) => {
-        try {
-            const response = await yelp.get('/search', {
-                params: {
-                    limit: 50,
-                    term: defaultTerm,
-                    latitude: location.coords.latitude,
-                    longitude: location.coords.longitude,
-                    radius: 4000,
-                }
-            });
-            setResults(response.data.businesses);
-        } catch (error) {
-            setErrorMessage('Something went wrong 😢')
+  const getLocation = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      setLocationErrorMessage('Permission to access location was denied');
+      return;
+    }
+    const location = await Location.getCurrentPositionAsync({});
+    setLocation(location.coords);
+  };
+  
+  const searchAPI = useCallback(async (defaultTerm) => {
+    try {
+      console.log(`latitude: ${location.latitude}`);
+      console.log(`longitude: ${location.longitude}`);
+      const response = await yelp.get('/search', {
+        params: {
+          limit: 50,
+          term: defaultTerm,
+          latitude: location.latitude,
+          longitude: location.longitude,
+          radius: 4000,
         }
-    };
+      });
+      setResults(response.data.businesses);
+    } catch (error) {
+      setApiErrorMessage('Something went wrong 😢')
+    }
+  }, [location]);
 
-    useEffect(() => {
-        useLocation({}).then(searchAPI(''))
-    }, []);
+  useEffect(() => {
+    getLocation();
+  }, []);
 
-    return [searchAPI, results, errorMessage];
+  useEffect(() => {
+    if (location) {
+      searchAPI('');
+    }
+  }, [location])
+
+  console.log(`location:`);
+  console.log(location);
+  console.log('location err: ' + locationErrorMessage);
+  console.log('results length: ' + results.length);
+  return [searchAPI, results, apiErrorMessage, location, locationErrorMessage];
 };
