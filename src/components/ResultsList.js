@@ -3,15 +3,12 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { FlatList } from 'react-native-gesture-handler';
 import ResultsDetail from '../components/ResultsDetail';
-import { useMemo } from 'react/cjs/react.development';
 
 
 const ResultsList = (props) => {
   if (!props.results.length) {
       return null;
   }
-
-  const memoizedValue = useMemo(() => renderItem, [props.results])
 
   return (
     <View style={styles.containerStyle}>
@@ -21,17 +18,17 @@ const ResultsList = (props) => {
         showsHorizontalScrollIndicator={false}
         data={props.results}
         keyExtractor={(result) => result.id}
-        renderItem={memoizedValue}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity onPress={() => props.navigation.navigate('ResultsShow', { id: item.id })}>
+              <ResultsDetail result={item} />
+            </TouchableOpacity>
+          )
+        }}
       />
     </View>
   )
 };
-
-const renderItem = ({ item }) => (
-  <TouchableOpacity onPress={() => props.navigation.navigate('ResultsShow', { id: item.id })}>
-    <ResultsDetail result={item} />
-  </TouchableOpacity>
-)
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -45,4 +42,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(ResultsList);
+export default React.memo(withNavigation(ResultsList));

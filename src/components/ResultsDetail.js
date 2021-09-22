@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ResultsDetail;
+export default React.memo(ResultsDetail);
