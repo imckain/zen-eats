@@ -1,9 +1,12 @@
-import React from 'react';
-import { Text, View, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, View, StyleSheet, Image, FlatList, TouchableOpacity, Linking } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
 
 const ReviewList = ({ reviews }) => {
+  useEffect(() => {
+    Linking.openURL()
+  })
 
   return (
     <View>
