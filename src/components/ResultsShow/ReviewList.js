@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
-import { Text, View, StyleSheet, Image, FlatList, TouchableOpacity, Linking } from 'react-native';
+import React, { useEffect, useCallback } from 'react';
+import { Text, View, StyleSheet, Image, FlatList, TouchableOpacity, Linking, Pressable } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
 
 const ReviewList = ({ reviews }) => {
-  useEffect(() => {
-    Linking.openURL()
-  })
-
+    const handleReviewPress = useCallback(async(url) => {
+        await Linking.canOpenURL(url).then(() => 
+            Linking.openURL(url)
+        )}, []);
+    
   return (
     <View>
       <FlatList 
@@ -32,9 +33,9 @@ const ReviewList = ({ reviews }) => {
                 </View>
               </View>
               <View>
-                <TouchableOpacity style={styles.linkButtonStyle} >
-                  <Text style={styles.linkButtonTextStyle}>Read Full Review</Text>
-                </TouchableOpacity>
+                <Pressable style={styles.linkButtonStyle} onPressIn={() => handleReviewPress(item.url)} >
+                  <Text style={styles.linkButtonTextStyle} >Read Full Review</Text>
+                </Pressable>
               </View>
             </View>
           )
