@@ -42,11 +42,11 @@ const SearchScreen = props => {
         <ScrollView style={styles.resultsListsStyles}>
           <View style={styles.topPaddingBlock} />
           <ResultsList 
-            title='Cost Effective' 
+            title='Value Menu' 
             results={filterResultsByPrice('$')}
             />
           <ResultsList 
-            title='Not Cheap' 
+            title='Chain City' 
             results={filterResultsByPrice('$$')}
             />
           <ResultsList 

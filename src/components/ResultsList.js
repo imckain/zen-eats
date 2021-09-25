@@ -7,7 +7,7 @@ import ResultsDetail from '../components/ResultsDetail';
 
 const ResultsList = (props) => {
   if (!props.results.length) {
-      return null;
+    return null;
   }
 
   return (

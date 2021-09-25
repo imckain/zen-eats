@@ -4,10 +4,10 @@ import { Text, View, StyleSheet, FlatList, Linking, Pressable } from 'react-nati
 import { FontAwesome } from '@expo/vector-icons';
 
 const ReviewList = ({ reviews }) => {
-    const handleReviewPress = useCallback(async(url) => {
-        await Linking.canOpenURL(url).then(() => 
-            Linking.openURL(url)
-        )}, []);
+  const handleReviewPress = useCallback(async(url) => {
+    await Linking.canOpenURL(url).then(() => 
+      Linking.openURL(url)
+    )}, []);
     
   return (
     <View>
@@ -41,7 +41,7 @@ const ReviewList = ({ reviews }) => {
           )
         }}
         style={styles.reviewFlatListStyle}
-        />
+      />
     </View>
   );
 };
