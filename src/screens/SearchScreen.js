@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { ActivityIndicator, Text, View, StyleSheet, ScrollView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
@@ -11,15 +11,27 @@ const SearchScreen = props => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchAPI, results, errorMessage] = useResults();
   
+  const isLoading = (results) => {
+    if(results[0] === undefined) {
+      return (
+        <View style={styles.activityIndicatorContainerStyle}>
+          <ActivityIndicator size='large' color='black' style={styles.activityIndicatorStyle} />
+        </View>
+      )
+    } else return
+  }
+
   const filterResultsByPrice = (price) => {
     return results.filter(result => {
       return result.price === price;
     });
   };
+
   
   return (
     <View style={styles.resultsContainerStyle}>
       <SafeAreaView>
+        {isLoading(results)}
         <StatusBar style='dark' />
         <SearchBar 
           searchTerm={searchTerm} 
@@ -53,6 +65,17 @@ const SearchScreen = props => {
 };
 
 const styles = StyleSheet.create({
+  activityIndicatorContainerStyle: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+    paddingTop: 300,
+  },
   resultsContainerStyle: {
     backgroundColor: '#ffffff',
     flex: 1,
