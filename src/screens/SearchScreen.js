@@ -11,8 +11,8 @@ const SearchScreen = props => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchAPI, results, errorMessage] = useResults();
   
-  const isLoading = (results) => {
-    if(results[0] === undefined) {
+  const isLoading = (item) => {
+    if(item[0] === undefined) {
       return (
         <View style={styles.activityIndicatorContainerStyle}>
           <ActivityIndicator size='large' color='black' style={styles.activityIndicatorStyle} />

@@ -9,6 +9,16 @@ import ReviewList from '../components/ResultsShow/ReviewList';
 const ResultsShowScreen = ({ navigation }) => {
   const [result, setResult] = useState(null);
   const [reviews, setReviews] = useState([]);
+
+  const isLoading = (item) => {
+    if(item === null) {
+      return (
+        <View style={styles.activityIndicatorContainerStyle}>
+          <ActivityIndicator size='large' color='black' style={styles.activityIndicatorStyle} />
+        </View>
+      )
+    } else return
+  }
   
   const id = navigation.getParam('id');
   
@@ -36,6 +46,7 @@ const ResultsShowScreen = ({ navigation }) => {
 
   return (
     <View style={styles.containerStyle}>
+      {isLoading(result)}
       <DetailHeader result={result} />
       <DetailPhotoList result={result} />
       <ReviewList reviews={reviews} />
