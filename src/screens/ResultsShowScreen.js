@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import yelp from '../api/yelp';
 
 import DetailHeader from '../components/ResultsShow/DetailHeader';
@@ -45,7 +45,9 @@ const ResultsShowScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#ffffff',
+    flex: 1,
   },
 });
 
