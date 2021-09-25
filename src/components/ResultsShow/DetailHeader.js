@@ -1,10 +1,33 @@
-import React from 'react';
-import { Text, View, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native';
+import React, { useCallback } from 'react';
+import { Text, View, StyleSheet, Linking, Pressable } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 const DetailHeader = ({ result }) => {
+    const openOrClosed = (item) => {
+        try {
+            if(item.hours[0].is_open_now === true) {
+                return <Text style={styles.openNowStyle}>{<View style={styles.openStyle}><Text style={styles.openTextStyle} >OPEN</Text></View> }</Text>
+            }
+            if(item.hours[0].is_open_now === false) {
+                return <Text style={styles.openNowStyle}>{<View style={styles.closedStyle}><Text style={styles.closedTextStyle} >CLOSED</Text></View>} </Text>
+            }
+        } catch (error) {
+            return <Text>Hours Unavailable</Text>;
+        }
+    }
+
+    const handlePhoneCall = useCallback(async(tel) => {
+        await Linking.canOpenURL(`tel:${tel}`).then(() =>
+            Linking.openURL(`tel:${tel}`)
+    )}, []);
+
+    const handleAddress = useCallback(async(lat, lon, label) => {
+        const link = `maps:0,0?q=${label}@${lat},${lon}`
+        await Linking.canOpenURL(link).then(() =>
+            Linking.openURL(link)
+    )}, []);
 
   return (
     <View>
@@ -14,9 +37,13 @@ const DetailHeader = ({ result }) => {
       </View>
       <View style={styles.detailContainerStyle}>
         <Text style={styles.categoryStyle}>{result.categories[0].title} </Text>
-        <Text style={styles.openNowStyle}>{result.hours[0].is_open_now === true ? <View style={styles.openStyle}><Text style={styles.openTextStyle} >OPEN</Text></View> : <View style={styles.closedStyle}><Text style={styles.closedTextStyle} >CLOSED</Text></View>} </Text>
-        <Text style={styles.detailTextStyle}><FontAwesome5 name="phone-alt" size={20} color="#35C75A" />  {result.display_phone} </Text>
-        <Text style={styles.detailTextStyle}><FontAwesome name="map-o" size={20} color="black" />  {result.location.display_address[0]}, {result.location.display_address[1]} </Text>
+        {openOrClosed(result)}
+        <Pressable onPress={() => handlePhoneCall(result.phone)}>
+            <Text style={styles.detailTextStyle}><FontAwesome5 name="phone-alt" size={20} color="#35C75A" />  {result.display_phone} </Text>
+        </Pressable>
+        <Pressable onPress={() => handleAddress(result.coordinates.latitude, result.coordinates.longitude, result.name)}>
+            <Text style={styles.detailTextStyle}><FontAwesome name="map-o" size={20} color="black" />  {result.location.display_address[0]}, {result.location.display_address[1]} </Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -46,32 +73,19 @@ const styles = StyleSheet.create({
   categoryStyle: {
     marginBottom: 5,
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: '500',
   },
   openNowStyle: {
-    marginBottom: 8,
-    // fontSize: 20,
-    // fontWeight: '600',
-    // paddingTop: 3,
-    // width: 80,
-    // alignContent: 'stretch',
-    // alignItems: 'stretch',
-    // textAlign: 'center',
-    // justifyContent: 'center',
-    // flexDirection: 'row',
+    marginVertical: 8,
   },
   openStyle: {
     backgroundColor: 'green',
     width: 60,
-    // paddingHorizontal: 5,
     paddingVertical: 5,
     fontSize: 20,
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    // alignSelf: 'stretch'
-    // borderColor: 'black',
-    // borderWidth: 2,
     borderRadius: 4,
   },
   openTextStyle: {
@@ -84,15 +98,11 @@ const styles = StyleSheet.create({
   closedStyle: {
     backgroundColor: 'red',
     width: 80,
-    // paddingHorizontal: 5,
     paddingVertical: 5,
     fontSize: 20,
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    // alignSelf: 'stretch'
-    // borderColor: 'black',
-    // borderWidth: 2,
     borderRadius: 4,
   },
   closedTextStyle: {
