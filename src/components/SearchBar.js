@@ -13,6 +13,7 @@ const SearchBar = ({ searchTerm, onSearchTermChange, onSearchTermSubmit }) => {
         autoCorrect={false}
         style={styles.inputStyle} 
         placeholder='Search' 
+        placeholderTextColor='rgb(175, 175, 175)'
         value={searchTerm}
         onChangeText={onSearchTermChange}
         onEndEditing={onSearchTermSubmit}
@@ -35,10 +36,15 @@ const styles = StyleSheet.create({
   inputStyle: {
     backgroundColor: 'rgba(240, 238, 238, 1)',
     borderRadius: 15,
+    borderWidth: 1,
+    borderColor: 'rgb(242, 162, 44)',
     paddingHorizontal: 10,
+    paddingLeft: 16,
     marginHorizontal: 10,
     height: '100%',
     flex: 1,
+    fontSize: 20,
+    fontWeight: '500'
   }
 });
 

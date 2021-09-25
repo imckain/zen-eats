@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   quoteLineStyle: {
     width: 3,
     height: '100%',
-    backgroundColor: '#D32422',
+    backgroundColor: 'rgb(242, 162, 44)',
     marginRight: 2,
     borderRadius: 4,
   },
