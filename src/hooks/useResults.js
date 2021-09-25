@@ -15,6 +15,7 @@ export default () => {
       return;
     }
     const location = await Location.getCurrentPositionAsync({});
+    console.log('Location Checked');
     setLocation(location.coords);
   };
   
