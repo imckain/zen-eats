@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import SearchBar from '../components/SearchBar';
-import yelp from '../api/yelp';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
+import { SafeAreaView } from 'react-navigation';
 
 
 const SearchScreen = props => {
@@ -18,32 +19,35 @@ const SearchScreen = props => {
   
   return (
     <View style={styles.resultsContainerStyle}>
-      <SearchBar 
-        searchTerm={searchTerm} 
-        onSearchTermChange={setSearchTerm} 
-        onSearchTermSubmit={() => searchAPI(searchTerm)}
-      />
-      {errorMessage ? <Text>{errorMessage}</Text> : null}
-      <ScrollView style={styles.resultsListsStyles}>
-        <View style={styles.topPaddingBlock} />
-        <ResultsList 
-          title='Cost Effective' 
-          results={filterResultsByPrice('$')}
-          />
-        <ResultsList 
-          title='Not Cheap' 
-          results={filterResultsByPrice('$$')}
-          />
-        <ResultsList 
-          title='Someone Got Paid' 
-          results={filterResultsByPrice('$$$')}
-          />
-        <ResultsList 
-          title='Fancy Pants' 
-          results={filterResultsByPrice('$$$$')}
+      <SafeAreaView>
+        <StatusBar style='dark' />
+        <SearchBar 
+          searchTerm={searchTerm} 
+          onSearchTermChange={setSearchTerm} 
+          onSearchTermSubmit={() => searchAPI(searchTerm)}
         />
-        <View style={styles.bottomPaddingBlock} />
-      </ScrollView>
+        {errorMessage ? <Text>{errorMessage}</Text> : null}
+        <ScrollView style={styles.resultsListsStyles}>
+          <View style={styles.topPaddingBlock} />
+          <ResultsList 
+            title='Cost Effective' 
+            results={filterResultsByPrice('$')}
+            />
+          <ResultsList 
+            title='Not Cheap' 
+            results={filterResultsByPrice('$$')}
+            />
+          <ResultsList 
+            title='Someone Got Paid' 
+            results={filterResultsByPrice('$$$')}
+            />
+          <ResultsList 
+            title='Fancy Pants' 
+            results={filterResultsByPrice('$$$$')}
+          />
+          <View style={styles.bottomPaddingBlock} />
+        </ScrollView>
+      </SafeAreaView>
     </View>
   )
 };
