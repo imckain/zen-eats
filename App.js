@@ -1,7 +1,13 @@
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import { StyleSheet} from 'react-native';
+
 import ResultsShowScreen from './src/screens/ResultsShowScreen';
 import SearchScreen from './src/screens/SearchScreen';
+import TitleLogo from './src/components/Header/TitleLogo';
+
+import { FontAwesome } from '@expo/vector-icons';
 
 const navigator = createStackNavigator({
 	Search: SearchScreen,
@@ -10,8 +16,18 @@ const navigator = createStackNavigator({
 {
 	initialRouteName:'Search',
 	defaultNavigationOptions: {
-		title: 'Business Search'
-	}
+		headerTitle: () => <TitleLogo />,
+		headerBackImage: () => <FontAwesome name="chevron-left" size={28} color="black" style={styles.backButton} />,
+		headerBackTitle: ' '
+	},
 });
+
+const styles = StyleSheet.create({
+	backButton: {
+		marginLeft: 18,
+		marginBottom: 10,
+		marginTop: 5,
+	},
+})
 
 export default createAppContainer(navigator);
