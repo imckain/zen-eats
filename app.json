@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "food-finder",
-    "slug": "food-finder",
+    "name": "zen-eats",
+    "slug": "zen-eats",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
