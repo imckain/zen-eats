@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, FlatList } from 'react-native';
 
 const DetailPhotoList = ({ result }) => {
 

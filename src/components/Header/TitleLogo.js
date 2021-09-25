@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, Image } from 'react-native';
-import * as logo from '../../../assets/logo.png';
+import { StyleSheet, Image } from 'react-native';
 
 export default TitleLogo = () => {
     
