@@ -18,7 +18,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "requireFullScreen": true
+      "requireFullScreen": true,
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
