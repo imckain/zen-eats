@@ -2,7 +2,7 @@
   "expo": {
     "name": "zen-eats",
     "slug": "zen-eats",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": false,
       "requireFullScreen": true,
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.1",
       "bundleIdentifier": "com.zeneats.app"
     },
     "infoPlist": {
