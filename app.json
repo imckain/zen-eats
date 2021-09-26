@@ -22,6 +22,9 @@
       "buildNumber": "1.0.0",
       "bundleIdentifier": "com.zeneats.app"
     },
+    "infoPlist": {
+      "NSLocationWhenInUseUsageDescription": "Zen Eats uses your current location to find local restaurants near you"
+    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
