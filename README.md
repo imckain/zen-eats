@@ -18,9 +18,9 @@ Thanks for checking out Zen Eats and supporting my development journey.
 
 ---
 
-![screenshot] (./assets/screenshots/screenshot1.jpeg)
-![screenshot] (./assets/screenshots/screenshot2.jpeg)
-![screenshot] (./assets/screenshots/screenshot3.jpeg)
+![screenshot](./assets/screenshots/screenshot1.jpeg)
+![screenshot](./assets/screenshots/screenshot2.jpeg)
+![screenshot](./assets/screenshots/screenshot3.jpeg)
 
 ---
 
