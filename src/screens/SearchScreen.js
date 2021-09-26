@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, Text, View, StyleSheet, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 import { StatusBar } from 'expo-status-bar';
+
 import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
-import { SafeAreaView } from 'react-navigation';
-
 
 const SearchScreen = props => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,16 +17,22 @@ const SearchScreen = props => {
         <View style={styles.activityIndicatorContainerStyle}>
           <ActivityIndicator size='large' color='black' style={styles.activityIndicatorStyle} />
         </View>
-      )
+      );
     } else return
-  }
+  };
 
   const filterResultsByPrice = (price) => {
     return results.filter(result => {
       return result.price === price;
     });
   };
-
+  
+  const paddingBlock = (item) => {
+    const topTier = results.price === '$$$$';
+    if(topTier === false) {
+      return <View style={styles.middlePaddingBlock} />
+    };
+  };
   
   return (
     <View style={styles.resultsContainerStyle}>
@@ -44,15 +50,16 @@ const SearchScreen = props => {
           <ResultsList 
             title='Value Menu' 
             results={filterResultsByPrice('$')}
-            />
+          />
           <ResultsList 
-            title='Chain City' 
+            title="Budget Ballin'"
             results={filterResultsByPrice('$$')}
-            />
+          />
           <ResultsList 
             title='Someone Got Paid' 
             results={filterResultsByPrice('$$$')}
-            />
+          />
+          {paddingBlock(results)}
           <ResultsList 
             title='Fancy Pants' 
             results={filterResultsByPrice('$$$$')}
@@ -82,6 +89,9 @@ const styles = StyleSheet.create({
   },
   topPaddingBlock: {
     height: 20
+  },
+  middlePaddingBlock: {
+    height: 100,
   },
   bottomPaddingBlock: {
     height: 40

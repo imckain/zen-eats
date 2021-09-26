@@ -14,7 +14,7 @@ const DetailHeader = ({ result }) => {
         return <Text style={styles.openNowStyle}>{<View style={styles.closedStyle}><Text style={styles.closedTextStyle} >CLOSED</Text></View>} </Text>
       }
     } catch (error) {
-      return <Text>Hours Unavailable</Text>;
+      return <Text style={styles.hoursErrorText}>Hours Unavailable</Text>;
     }
   }
 
@@ -39,10 +39,10 @@ const DetailHeader = ({ result }) => {
         <Text style={styles.categoryStyle}>{result.categories[0].title} </Text>
         {openOrClosed(result)}
         <Pressable onPress={() => handlePhoneCall(result.phone)}>
-          <Text style={styles.detailTextStyle}><FontAwesome5 name="phone-alt" size={20} color="#35C75A" />  {result.display_phone} </Text>
+          <Text style={styles.detailTextStyle}> <FontAwesome5 name="phone-alt" size={20} color="#35C75A" />    {result.display_phone} </Text>
         </Pressable>
         <Pressable onPress={() => handleAddress(result.coordinates.latitude, result.coordinates.longitude, result.name)}>
-          <Text style={styles.detailTextStyle}><FontAwesome name="map-o" size={20} color="black" />  {result.location.display_address[0]}, {result.location.display_address[1]} </Text>
+          <Text style={styles.detailTextStyle}><FontAwesome5 name="map-marked-alt" size={28} color="rgb(236, 91, 87)" />   {result.location.display_address[0]}, {result.location.display_address[1]} </Text>
         </Pressable>
       </View>
     </View>
@@ -77,6 +77,11 @@ const styles = StyleSheet.create({
   },
   openNowStyle: {
     marginVertical: 8,
+  },
+  hoursErrorText: {
+    marginVertical: 8,
+    fontSize: 17,
+    fontWeight: '500',
   },
   openStyle: {
     backgroundColor: 'green',
