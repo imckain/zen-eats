@@ -17,10 +17,12 @@ This app was built using React Native with a few additional libraries.
 Thanks for checking out Zen Eats and supporting my development journey.
 
 ---
-
-![screenshot](./assets/screenshots/screenshot1.jpeg)
+<img src='./assets/screenshots/screenshot1.jpeg' height='200' />
+<img src='./assets/screenshots/screenshot2.jpeg' height='200' />
+<img src='./assets/screenshots/screenshot3.jpeg' height='200' />
+<!-- ![screenshot](./assets/screenshots/screenshot1.jpeg)
 ![screenshot](./assets/screenshots/screenshot2.jpeg)
-![screenshot](./assets/screenshots/screenshot3.jpeg)
+![screenshot](./assets/screenshots/screenshot3.jpeg) -->
 
 ---
 
