@@ -18,6 +18,12 @@ Thanks for checking out Zen Eats and supporting my development journey.
 
 ---
 
+![screeshot] (/assets/screenshots/screenshot1.jpeg)
+![screeshot] (/assets/screenshots/screenshot2.jpeg)
+![screeshot] (/assets/screenshots/screenshot3.jpeg)
+
+---
+
 ## **Privacy Policy**
 
 Ian McKain built the Zen Eats app as a Free app. This SERVICE is provided by Ian McKain at no cost and is intended for use as is.
