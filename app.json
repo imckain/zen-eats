@@ -17,7 +17,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "requireFullScreen": true,
       "buildNumber": "1.0.0"
     },
