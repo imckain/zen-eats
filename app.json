@@ -17,13 +17,13 @@
       "**/*"
     ],
     "ios": {
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Zen Eats uses your current location to find local restaurants near you"
+      },
       "supportsTablet": false,
       "requireFullScreen": true,
       "buildNumber": "1.0.1",
       "bundleIdentifier": "com.zeneats.app"
-    },
-    "infoPlist": {
-      "NSLocationWhenInUseUsageDescription": "Zen Eats uses your current location to find local restaurants near you"
     },
     "android": {
       "adaptiveIcon": {
