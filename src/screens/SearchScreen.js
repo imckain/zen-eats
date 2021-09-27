@@ -30,7 +30,7 @@ const SearchScreen = props => {
   const paddingBlock = (item) => {
     const topTier = item.price === '$$$$';
     if(topTier === false) {
-      return <View style={styles.middlePaddingBlock} />
+      return <View style={styles.paddingBlock} />
     };
   };
   
@@ -59,12 +59,11 @@ const SearchScreen = props => {
             title='Someone Got Paid' 
             results={filterResultsByPrice('$$$')}
           />
-          {paddingBlock(results)}
           <ResultsList 
             title='Fancy Pants' 
             results={filterResultsByPrice('$$$$')}
           />
-          <View style={styles.bottomPaddingBlock} />
+          {paddingBlock(results)}
         </ScrollView>
       </SafeAreaView>
     </View>
@@ -98,11 +97,8 @@ const styles = StyleSheet.create({
   topPaddingBlock: {
     height: 20
   },
-  middlePaddingBlock: {
-    height: 100,
-  },
-  bottomPaddingBlock: {
-    height: 40
+  paddingBlock: {
+    height: 130,
   },
 });
 
