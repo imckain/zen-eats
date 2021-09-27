@@ -23,8 +23,6 @@ export default () => {
   const searchAPI = useCallback(async (defaultTerm) => {
     try {
       console.log('searchAPI() ran');
-      console.log(`lat: ${location.latitude}`);
-      console.log(`lon: ${location.longitude}`);
       const response = await yelp.get('/search', {
         params: {
           limit: 50,
@@ -34,9 +32,6 @@ export default () => {
           radius: 4000,
         }
       });
-      console.log(response.status);
-      console.log(response.data);
-      console.log(response.headers);
       setResults(response.data.businesses);
     } catch (error) {
       console.log('error: ' + error);
@@ -53,8 +48,6 @@ export default () => {
       searchAPI('');
     }
   }, [location])
-
-  console.log(results);
 
   return [searchAPI, results, apiErrorMessage, location, locationErrorMessage];
 };
