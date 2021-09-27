@@ -10,6 +10,7 @@ export default () => {
 
   const getLocation = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
+    console.log(status);
     if (status !== 'granted') {
       setLocationErrorMessage('Permission to access location was denied');
       return;
@@ -22,6 +23,8 @@ export default () => {
   const searchAPI = useCallback(async (defaultTerm) => {
     try {
       console.log('searchAPI() ran');
+      console.log(`lat: ${location.latitude}`);
+      console.log(`lon: ${location.longitude}`);
       const response = await yelp.get('/search', {
         params: {
           limit: 50,
@@ -31,9 +34,13 @@ export default () => {
           radius: 4000,
         }
       });
+      console.log(response.status);
+      console.log(response.data);
+      console.log(response.headers);
       setResults(response.data.businesses);
     } catch (error) {
-      setApiErrorMessage('Something went wrong 😢')
+      console.log('error: ' + error);
+      setApiErrorMessage('Something went wrong 😢 \n Check back later')
     }
   }, [location]);
 
@@ -46,6 +53,8 @@ export default () => {
       searchAPI('');
     }
   }, [location])
+
+  console.log(results);
 
   return [searchAPI, results, apiErrorMessage, location, locationErrorMessage];
 };

@@ -28,7 +28,7 @@ const SearchScreen = props => {
   };
   
   const paddingBlock = (item) => {
-    const topTier = results.price === '$$$$';
+    const topTier = item.price === '$$$$';
     if(topTier === false) {
       return <View style={styles.middlePaddingBlock} />
     };
@@ -44,7 +44,7 @@ const SearchScreen = props => {
           onSearchTermChange={setSearchTerm} 
           onSearchTermSubmit={() => searchAPI(searchTerm)}
         />
-        {errorMessage ? <Text>{errorMessage}</Text> : null}
+        {errorMessage ? <Text style={styles.errorMessage}>{errorMessage}</Text> : null}
         <ScrollView style={styles.resultsListsStyles}>
           <View style={styles.topPaddingBlock} />
           <ResultsList 
@@ -86,6 +86,14 @@ const styles = StyleSheet.create({
   resultsContainerStyle: {
     backgroundColor: '#ffffff',
     flex: 1,
+  },
+  errorMessage: {
+    alignSelf: 'center',
+    fontSize: 26,
+    fontWeight: '500',
+    textAlign: 'center',
+    lineHeight: 38,
+    paddingTop: 35,
   },
   topPaddingBlock: {
     height: 20
