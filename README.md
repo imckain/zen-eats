@@ -1,6 +1,6 @@
 # Zen Eats
 
-## 📱 View on App Store: [Zen Eats] (https://apps.apple.com/us/app/zen-eats/id1587540510)
+## 📱 View on App Store: [Zen Eats](https://apps.apple.com/us/app/zen-eats/id1587540510)
 
 ---
 
