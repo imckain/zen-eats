@@ -2,7 +2,7 @@
   "expo": {
     "name": "zen-eats",
     "slug": "zen-eats",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": false,
       "requireFullScreen": true,
-      "buildNumber": "1.0.2",
+      "buildNumber": "1.0.3",
       "bundleIdentifier": "com.zeneats.app",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Zen Eats uses your current location to find local restaurants near you"
