@@ -1,17 +1,16 @@
-import React from 'react';
-import { View, StyleSheet, Image, FlatList } from 'react-native';
+import React from "react";
+import { View, StyleSheet, Image, FlatList } from "react-native";
 
 const DetailPhotoList = ({ result }) => {
-
   return (
     <View>
-      <FlatList 
+      <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
         data={result.photos}
         keyExtractor={(photo) => photo}
         renderItem={({ item }) => {
-          return <Image style={styles.imageStyle} source={{ uri: item }} />
+          return <Image style={styles.imageStyle} source={{ uri: item }} />;
         }}
         style={styles.flatListStyle}
       />
